@@ -21,8 +21,6 @@ class Solution {
             return;
         }
         if(i==0 || i==board.length-1 || j==0 || j==board[i].length-1){
-            System.out.println("Inside");
-            System.out.println(i + ", " + j);
             res[0] = false;
         }
         board[i][j]='A';
@@ -42,13 +40,3 @@ class Solution {
         }
     }
 }
-
-// "O","X","O"
-// "X","O","X"
-// "O","X","O"
-// "O","O","O","O","O","O"
-// "O","X","X","X","X","O"
-// "O","X","O","O","X","O"
-// "O","X","O","O","X","O"
-// "O","X","X","X","X","O"
-// "O","O","O","O","O","O"
