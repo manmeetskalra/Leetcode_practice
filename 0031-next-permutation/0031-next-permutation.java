@@ -1,54 +1,38 @@
 class Solution {
     public void nextPermutation(int[] nums) {
-        int i = nums.length-1;
-        int max = Integer.MIN_VALUE;
-        List<Integer> l = new ArrayList<>();
-        while(i>=0){
-            if(max==Integer.MIN_VALUE){
-                max = nums[i];
-                l.add(nums[i]);
-                i--;
-            } else{
-                if(nums[i]<max){
-                    System.out.println("Inside loop");
-                    theekKar(nums,i,l);
-                    //l.add(nums[i]);
-                    //Collections.sort(l);
-                    // for(int j=i;j<nums.length;j++){
-                    //     nums[j] = l.get(l.size()-1);
-                    //     //System.out.println(nums[j]);
-                    //     l.remove(l.size()-1);
-                    // }
-                    return;
-                }
-                else{
-                    System.out.println("Inside else");
-                    l.add(nums[i]);
-                    max = Math.max(nums[i],max);
-                    i--;
-                }
+        int n = nums.length-1;
+        int partition = -1;
+        for(int i=n;i>0;i--){
+            if(nums[i]>nums[i-1]){
+                partition = i-1;
+                break;
             }
         }
-        Arrays.sort(nums);
-    }
-    public void theekKar(int[] nums, int start, List<Integer> l){
-        System.out.println("Inside");
-        Collections.sort(l);
-        for(int i=0;i<l.size();i++){
-            int curr = l.get(i);
-            int num = nums[start];
-            if(curr>num){
-                l.remove(Integer.valueOf(curr));
-                l.add(num);
-                Collections.sort(l);
-                nums[start] = curr;
-                int k=0;
-                for(int j=start+1;j<nums.length;j++){
-                    nums[j] = l.get(k);
-                    k++;
-                }
+        // System.out.println(partition);
+        if(partition==-1){
+            reverse(nums,0,n);
+            return;
+        }
+        for(int i=n;i>partition;i--){
+            if(nums[i]>nums[partition]){
+                swap(nums,i,partition);
+                reverse(nums,partition+1,n);
                 return;
             }
+        }
+        return;
+    }
+    public void swap(int[] nums, int i, int j){
+        int t  = nums[i];
+        nums[i] = nums[j];
+        nums[j] = t;
+        return;
+    }
+    public void reverse(int[] nums, int i, int j){
+        while(i<j){
+            int t  = nums[i];
+            nums[i++] = nums[j];
+            nums[j--] = t;
         }
     }
 }
