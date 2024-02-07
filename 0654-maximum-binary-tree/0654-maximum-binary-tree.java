@@ -21,21 +21,24 @@ class Solution {
         if(start>end){
             return null;
         }
-        if(start==end){
-            return new TreeNode(nums[start]);
-        }
-        int index = -1;
-        Stack<Integer> stack = new Stack<>();
-        for(int i=end;i>=start;i--){
-            if(!stack.isEmpty() && nums[i]>nums[stack.peek()]){
-                while(!stack.isEmpty() && nums[i]>nums[stack.peek()]){
-                    stack.pop();
-                }
-            }
-            if(stack.isEmpty()){
+        // if(start==end){
+        //     return new TreeNode(nums[start]);
+        // }
+        int index = end;
+        //Stack<Integer> stack = new Stack<>();
+        for(int i=end-1;i>=start;i--){
+            if(nums[i]>nums[index]){
                 index = i;
             }
-            stack.push(i);
+            // if(!stack.isEmpty() && nums[i]>nums[stack.peek()]){
+            //     while(!stack.isEmpty() && nums[i]>nums[stack.peek()]){
+            //         stack.pop();
+            //     }
+            // }
+            // if(stack.isEmpty()){
+            //     index = i;
+            // }
+            // stack.push(i);
         }
         TreeNode root = new TreeNode(nums[index]);
         root.left = recursive(nums,start,index-1);
