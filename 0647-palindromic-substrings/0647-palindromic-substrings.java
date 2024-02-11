@@ -1,27 +1,16 @@
 class Solution {
     public int countSubstrings(String s) {
-        List<String> list = new ArrayList<>();
-        helper(s,0,list);
-        return list.size();
-    }
-    public void helper(String s, int start, List<String> list){
-        if(start==s.length()){
-            return;
+        int ctr = 0;
+        for(int i=0;i<s.length();i++){
+            ctr += helper(s,i,i);
+            ctr += helper(s,i,i+1);
         }
-        for(int i=start;i<s.length();i++){
-            String str = s.substring(start,i+1);
-            if(check(str)){
-                //System.out.println(str);
-                list.add(str);
-            }
-        }
-        helper(s,start+1,list);
-        return;
+        return ctr;
     }
-    public boolean check(String s){
-        StringBuilder sb = new StringBuilder(s);
-        //System.out.println("sb: " + sb + "rev: " + sb.reverse());
-        String rev = sb.reverse().toString();
-        return s.equals(rev);
+    public int helper(String s, int i, int j){
+        if(i<0 || j>=s.length() || s.charAt(i)!=s.charAt(j)){
+            return 0;
+        }
+        return 1+helper(s,i-1,j+1);
     }
 }
