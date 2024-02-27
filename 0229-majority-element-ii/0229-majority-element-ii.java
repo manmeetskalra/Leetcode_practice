@@ -1,12 +1,5 @@
 class Solution {
     public List<Integer> majorityElement(int[] nums) {
-        // if(nums.length==1){
-        //     return new ArrayList<>(Arrays.asList(nums[0]));
-        // }
-        // if(nums.length==2){
-        //     return new ArrayList<>(Arrays.asList(nums[0],nums[1]));
-        // }
-        //List<Integer> list = new ArrayList<>(Arrays.asList(nums[0],nums[1]));
         int one = 0;
         int num1 = 0;
         int num2 = 0;
@@ -35,8 +28,6 @@ class Solution {
             if(nums[i]==num1) one++;
             else if(nums[i]==num2) two++;
         }
-        System.out.println(one);
-        System.out.println(two);
         if(one>threshold){
             list.add(num1);
         }
