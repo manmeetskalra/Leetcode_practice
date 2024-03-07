@@ -3,10 +3,8 @@ class Solution {
         Stack<Integer> stack = new Stack<>();
         HashMap<Integer,Integer> hash = new HashMap<>();
         for(int i=nums2.length-1;i>=0;i--){
-            if(!stack.isEmpty() && stack.peek()<nums2[i]){
-                while(!stack.isEmpty() && stack.peek()<nums2[i]){
-                    stack.pop();
-                }
+            while(!stack.isEmpty() && stack.peek()<nums2[i]){
+                stack.pop();
             }
             int next = -1;
             if(!stack.isEmpty()){
