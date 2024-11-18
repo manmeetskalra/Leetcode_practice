@@ -1,27 +1,24 @@
 class Solution {
     public int[][] kClosest(int[][] points, int k) {
-        HashMap<Integer, Double> hash = new HashMap<>();
-        for(int i=0;i<points.length;i++){
-            double dist = distance(points[i]);
-            hash.put(i,dist);
-        }
-        List<Double> distances=new ArrayList<>(hash.values());
-        Collections.sort(distances);
-        double max = distances.get(k-1);
         int[][] res = new int[k][2];
-        int j = 0;
-        for(HashMap.Entry entry: hash.entrySet()){
-            Integer key = (Integer)entry.getKey();
-            if((Double)entry.getValue()<=max){
-                res[j] = points[key];
-                j++;
+        HashMap<Integer,Double> map = new HashMap<>();
+        for(int i=0;i<points.length;i++){
+            double dis = Math.pow(points[i][0],2) + Math.pow(points[i][1],2);
+            map.put(i,dis);
+        }
+
+        List<Double> l = new ArrayList<>(map.values());
+        Collections.sort(l);
+        double val = l.get(k-1);
+        int ctr=0;
+        for(int i=0;i<points.length;i++){
+            if(map.get(i)<=val){
+                res[ctr][0] = points[i][0];
+                res[ctr][1] = points[i][1];
+                ctr++;
             }
-            if(j==k) break;
         }
         return res;
-    }
-    public double distance(int[] points){
-        return Math.sqrt(Math.pow(points[0],2)+Math.pow(points[1],2));
     }
 }
 // Solution
